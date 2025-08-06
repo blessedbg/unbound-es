@@ -53,7 +53,7 @@ const HeroSection: React.FC = () => {
           <div className="video-container relative rounded-2xl overflow-hidden shadow-2xl bg-black">
             <div className="aspect-video">
              <iframe
-        src="https://www.youtube.com/embed/PwdI6QF2uGU?autoplay=1&cc_load_policy=1&loop=1&playlist=PwdI6QF2uGU&modestbranding=1&rel=0&enablejsapi=1"
+        src="https://www.youtube.com/embed/PwdI6QF2uGU?autoplay=1&cc_load_policy=1&loop=1&playlist=PwdI6QF2uGU&modestbranding=1&rel=0&enablejsapi=1&cc_lang_pref=es&hl=es"
         title={t('hero.videoTitle')}
         frameBorder={0}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
