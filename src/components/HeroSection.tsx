@@ -52,13 +52,12 @@ const HeroSection: React.FC = () => {
         <div className="max-w-4xl mx-auto mb-16">
           <div className="video-container relative rounded-2xl overflow-hidden shadow-2xl bg-black">
             <div className="aspect-video">
-              <iframe
-                src="https://player.vimeo.com/video/1044068088?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                title={t('hero.videoTitle')}
+             <iframe
+        src="https://www.youtube.com/embed/PwdI6QF2uGU?autoplay=1&cc_load_policy=1&loop=1&playlist=PwdI6QF2uGU&modestbranding=1&rel=0&enablejsapi=1"
+        title={t('hero.videoTitle')}
+        frameBorder={0}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
                 className="w-full h-full"
                 loading="lazy"
               ></iframe>
