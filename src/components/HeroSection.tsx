@@ -24,9 +24,11 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Main Headline */}
-         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight max-w-6xl mx-auto">
+   <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight max-w-6xl mx-auto">
   {t('hero.headline.part1')}{' '}
-  <span className="text-gradient">{t('hero.headline.part2')}</span>
+  <span className="text-gradient">
+    {t('hero.headline.part2')}
+  </span>
 </h1>
 
           {/* Subtitle */}
