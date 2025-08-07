@@ -32,21 +32,29 @@ const HeroSection: React.FC = () => {
 </h1>
 
           {/* Subtitle */}
-          <div className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-medium leading-relaxed max-w-5xl mx-auto space-y-2">
-            <p>
-              <span className="font-bold text-pink-600">{t('hero.subtitle.part1')}</span>
-              <span className="text-gray-700">{t('hero.subtitle.part2')}</span>
-              <span className="font-bold text-rose-600">{t('hero.subtitle.rewires')}</span>
-              <span className="text-gray-700">{t('hero.subtitle.part3')}</span>
-            </p>
-            <p>
-              <span className="text-gray-700">Construye </span>
-              <span className="font-bold text-purple-600">{t('hero.subtitle.selfTrust')}</span>
-              <span className="text-gray-700">{t('hero.subtitle.part4')}</span>
-              <span className="font-bold text-pink-600">{t('hero.subtitle.safeLove')}</span>
-              <span className="text-gray-700">{t('hero.subtitle.part5')}</span>
-            </p>
-          </div>
+          {/* Subtitle */}
+<div
+  className="
+    text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed
+    max-w-5xl mx-auto space-y-2
+    text-gray-700        /* base colour for the whole block      */
+    [&_*]:text-gray-700  /* force-override every descendant span */
+  "
+>
+  <p>
+    <span className="font-bold">{t('hero.subtitle.part1')}</span>
+    <span>{t('hero.subtitle.part2')}</span>
+    <span className="font-bold">{t('hero.subtitle.rewires')}</span>
+    <span>{t('hero.subtitle.part3')}</span>
+  </p>
+  <p>
+    <span>Construye </span>
+    <span className="font-bold">{t('hero.subtitle.selfTrust')}</span>
+    <span>{t('hero.subtitle.part4')}</span>
+    <span className="font-bold">{t('hero.subtitle.safeLove')}</span>
+    <span>{t('hero.subtitle.part5')}</span>
+  </p>
+</div>
         </div>
 
         {/* Video Section */}
