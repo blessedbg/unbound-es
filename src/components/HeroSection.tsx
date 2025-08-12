@@ -61,15 +61,16 @@ const HeroSection: React.FC = () => {
         <div className="max-w-4xl mx-auto mb-16">
           <div className="video-container relative rounded-2xl overflow-hidden shadow-2xl bg-black">
             <div className="aspect-video">
-             <iframe
-        src="https://www.youtube.com/embed/PwdI6QF2uGU?autoplay=1&cc_load_policy=1&loop=1&playlist=PwdI6QF2uGU&modestbranding=1&rel=0&enablejsapi=1&cc_lang_pref=es&hl=es"
-        title={t('hero.videoTitle')}
-        frameBorder={0}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-                className="w-full h-full"
-                loading="lazy"
-              ></iframe>
+            <iframe
+  width="1296"
+  height="729"
+  style="max-width:100%; height:auto; aspect-ratio:16/9; border:0;"
+  src="https://www.youtube-nocookie.com/embed/AHiT-tIk1uM?autoplay=1&mute=1&loop=1&playlist=AHiT-tIk1uM&playsinline=1&controls=0&modestbranding=1&rel=0&cc_load_policy=1&cc_lang_pref=en&hl=en"
+  title="Unbound VSL (EN)"
+  frameborder="0"
+  allow="autoplay; encrypted-media; picture-in-picture"
+  allowfullscreen
+></iframe>
             </div>
           </div>
           
