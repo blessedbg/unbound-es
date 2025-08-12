@@ -24,68 +24,64 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Main Headline */}
-   <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight max-w-6xl mx-auto">
-  {t('hero.headline.part1')}{' '}
-  <span className="text-gradient">
-    {t('hero.headline.part2')}
-  </span>
-</h1>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight max-w-6xl mx-auto">
+            {t('hero.headline.part1')}{' '}
+            <span className="text-gradient">{t('hero.headline.part2')}</span>
+          </h1>
 
           {/* Subtitle */}
-          {/* Subtitle */}
-<div
-  className="
-    text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed
-    max-w-5xl mx-auto space-y-2
-    text-gray-700        /* base colour for the whole block      */
-    [&_*]:text-gray-700  /* force-override every descendant span */
-  "
->
-  <p>
-    <span className="font-bold">{t('hero.subtitle.part1')}</span>
-    <span>{t('hero.subtitle.part2')}</span>
-    <span className="font-bold">{t('hero.subtitle.rewires')}</span>
-    <span>{t('hero.subtitle.part3')}</span>
-  </p>
-  <p>
-    <span>Construye </span>
-    <span className="font-bold">{t('hero.subtitle.selfTrust')}</span>
-    <span>{t('hero.subtitle.part4')}</span>
-    <span className="font-bold">{t('hero.subtitle.safeLove')}</span>
-    <span>{t('hero.subtitle.part5')}</span>
-  </p>
-</div>
+          <div
+            className="
+              text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed
+              max-w-5xl mx-auto space-y-2
+              text-gray-700
+              [&_*]:text-gray-700
+            "
+          >
+            <p>
+              <span className="font-bold">{t('hero.subtitle.part1')}</span>
+              <span>{t('hero.subtitle.part2')}</span>
+              <span className="font-bold">{t('hero.subtitle.rewires')}</span>
+              <span>{t('hero.subtitle.part3')}</span>
+            </p>
+            <p>
+              <span>Construye </span>
+              <span className="font-bold">{t('hero.subtitle.selfTrust')}</span>
+              <span>{t('hero.subtitle.part4')}</span>
+              <span className="font-bold">{t('hero.subtitle.safeLove')}</span>
+              <span>{t('hero.subtitle.part5')}</span>
+            </p>
+          </div>
         </div>
 
         {/* Video Section */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="video-container relative rounded-2xl overflow-hidden shadow-2xl bg-black">
             <div className="aspect-video">
-           <iframe
-  width="1296"
-  height="729"
-  style="max-width:100%; height:auto; aspect-ratio:16/9; border:0;"
-  src="https://www.youtube-nocookie.com/embed/AHiT-tIk1uM?autoplay=1&mute=1&loop=1&playlist=AHiT-tIk1uM&playsinline=1&controls=0&modestbranding=1&rel=0&cc_load_policy=1&cc_lang_pref=es&hl=es"
-  title="Unbound VSL (ES)"
-  frameborder="0"
-  allow="autoplay; encrypted-media; picture-in-picture"
-  allowfullscreen
-></iframe>
+              <iframe
+                width="1296"
+                height="729"
+                style={{ maxWidth: '100%', height: 'auto', aspectRatio: '16 / 9', border: 0 }}
+                src="https://www.youtube-nocookie.com/embed/AHiT-tIk1uM?autoplay=1&mute=1&loop=1&playlist=AHiT-tIk1uM&playsinline=1&controls=0&modestbranding=1&rel=0&cc_load_policy=1&cc_lang_pref=es&hl=es"
+                title="Unbound VSL (ES)"
+                frameBorder={0}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
             </div>
           </div>
-          
+
           {/* Video Caption */}
           <div className="text-center mt-6 space-y-2">
-            <p className="text-sm text-gray-600">
-              {t('hero.captionsAvailable')}
-            </p>
+            <p className="text-sm text-gray-600">{t('hero.captionsAvailable')}</p>
             <div className="flex items-center justify-center space-x-4 text-sm">
               <span className="flex items-center space-x-1">
-                <span className="w-3 h-2 bg-red-500 rounded-sm"></span>
+                <span className="w-3 h-2 bg-red-500 rounded-sm" />
                 <span className="text-gray-600">{t('hero.english')}</span>
               </span>
               <span className="flex items-center space-x-1">
-                <span className="w-3 h-2 bg-yellow-500 rounded-sm"></span>
+                <span className="w-3 h-2 bg-yellow-500 rounded-sm" />
                 <span className="text-gray-600">{t('hero.spanish')}</span>
               </span>
             </div>
@@ -94,11 +90,11 @@ const HeroSection: React.FC = () => {
 
         {/* CTA Section */}
         <div className="text-center space-y-8">
-          <CTAButton 
+          <CTAButton
             text={t('stickyButton')}
             className="btn-lg px-12 py-4 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
           />
-          
+
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center items-center gap-8 mt-12">
             <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-gray-100">
