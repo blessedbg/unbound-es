@@ -7,12 +7,17 @@ import EarlyAccessBadge from './EarlyAccessBadge';
 const HeroSection: React.FC = () => {
   const { t, i18n } = useTranslation();
 
-  // Remove any dash in “in your body — and in”
-  const part4Clean = t('hero.subtitle.part4').replace(/\s*[—–-]\s*/g, ' ');
+  // --- Locale fallback: prefer i18n.language, else URL prefix `/es`
+  const locale: 'en' | 'es' = (() => {
+    const lang = (i18n && i18n.language) || '';
+    if (lang.toLowerCase().startsWith('es')) return 'es';
+    if (typeof window !== 'undefined' && window.location?.pathname?.startsWith('/es')) return 'es';
+    return 'en';
+  })();
 
-  // --- YouTube embed (minimal chrome, EN UI/captions). Controls are ON so users can unmute if autoplay sound is blocked.
+  // --- YouTube embed (minimal chrome). Controls ON so users can unmute.
   const videoId = 'AHiT-tIk1uM';
-  const uiLang = i18n.language === 'es' ? 'es' : 'en';
+  const uiLang = locale; // sync player UI + captions with page locale
   const videoSrc =
     `https://www.youtube-nocookie.com/embed/${videoId}` +
     `?autoplay=1&mute=1&loop=1&playlist=${videoId}` +
@@ -21,88 +26,83 @@ const HeroSection: React.FC = () => {
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Best-effort attempt to unmute after autoplay starts (browsers may still keep it muted).
+  // Try to unmute after autoplay (browsers may keep it muted regardless)
   useEffect(() => {
     const win = iframeRef.current?.contentWindow;
     if (!win) return;
-    const post = (func: string, args: any[] = []) =>
-      win.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
-
+    const post = (func: string, args: any[] = []) => win.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
     const t1 = setTimeout(() => {
       post('playVideo');
       post('unMute');
       post('setVolume', [100]);
     }, 600);
-
     return () => clearTimeout(t1);
   }, []);
 
-  // --- Auto top padding to exactly clear your fixed header (no overlap, no giant gap)
-  const [headerPad, setHeaderPad] = useState<number>(96); // fallback ~h-24
+  // --- Auto top padding to clear fixed header (pulled up slightly for CTA-in-view)
+  const [headerPad, setHeaderPad] = useState<number>(96);
   useLayoutEffect(() => {
     const measure = () => {
-      // Try an explicit header first if you have an id; otherwise use the first <header>
-      const headerEl =
-        (document.getElementById('site-header') as HTMLElement | null) ||
-        (document.querySelector('header') as HTMLElement | null);
+      const headerEl = (document.getElementById('site-header') as HTMLElement | null) || (document.querySelector('header') as HTMLElement | null);
       const h = headerEl?.getBoundingClientRect().height ?? 96;
-      // add a tiny cushion so content never touches the border
-      setHeaderPad(Math.round(h + 2));
+      setHeaderPad(Math.round(h + 2)); // smaller cushion to bring CTA into view
     };
     measure();
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
   }, []);
 
+  // --- Headline + Subheadline (bypass i18n keys — hardcoded copy per locale)
+  const Headline = locale === 'en' ? (
+    <>
+      Why You&apos;re <span className="text-gradient whitespace-nowrap">Magnetically Drawn</span> to Men Who Will <span className="font-semibold">Break Your Heart</span>
+    </>
+  ) : (
+    <>
+      Por qué estás <span className="text-gradient whitespace-nowrap">magnéticamente atraída</span> por hombres que te <span className="font-semibold">romperán el corazón</span>
+    </>
+  );
+
+  const Subheadline = locale === 'en' ? (
+    <p>
+      The 6-phase method that <span className="font-bold text-gradient whitespace-nowrap">rewires</span> toxic attraction patterns
+    </p>
+  ) : (
+    <p>
+      El método de 6 fases que <span className="font-bold text-gradient whitespace-nowrap">reprograma</span> patrones de atracción tóxicos
+    </p>
+  );
+
   return (
     <section className="relative bg-gradient-to-br from-pink-50 via-white to-rose-50 overflow-hidden">
-      {/* Background elements (subtle) */}
+      {/* Subtle background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply blur-xl opacity-30 animate-float"></div>
-        <div className="absolute top-3/4 right-1/4 w-72 h-72 bg-rose-200 rounded-full mix-blend-multiply blur-xl opacity-30 animate-float delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply blur-xl opacity-20 animate-float delay-2000"></div>
+        <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply blur-xl opacity-30 animate-float" />
+        <div className="absolute top-3/4 right-1/4 w-72 h-72 bg-rose-200 rounded-full mix-blend-multiply blur-xl opacity-30 animate-float delay-1000" />
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply blur-xl opacity-20 animate-float delay-2000" />
       </div>
 
       {/* The hero offsets itself to header height dynamically */}
-      <div
-        className="relative max-w-7xl mx-auto px-4 pb-10 md:pb-12"
-        style={{ paddingTop: headerPad }}
-      >
-        <div className="text-center space-y-3 mb-3">
+      <div className="relative max-w-7xl mx-auto px-4 pb-6 md:pb-8" style={{ paddingTop: headerPad }}>
+        <div className="text-center space-y-2 mb-2">
           {/* Early Access Badge */}
           <div className="flex justify-center">
             <EarlyAccessBadge />
           </div>
 
-          {/* Main Headline — updated wording, slightly smaller for CTA visibility */}
-          <h1 className=\"text-xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight md:leading-[1.15] tracking-tight max-w-5xl md:max-w-6xl mx-auto">
-            {i18n.language === 'en' ? (
-              <>
-                Why You&apos;re <span className="text-gradient whitespace-nowrap">Magnetically Drawn</span> to Men Who Will <span className="font-semibold">Break Your Heart</span>
-              </>
-            ) : (
-              <>
-                Por qué estás <span className="text-gradient whitespace-nowrap">magnéticamente atraída</span> por hombres que te <span className="font-semibold">romperán el corazón</span>
-              </>
-            )}
+          {/* Main Headline — pattern emphasized, pain de-emphasized */}
+          <h1 className="text-base md:text-2xl lg:text-4xl font-extrabold text-gray-900 leading-tight md:leading-[1.15] tracking-tight max-w-5xl md:max-w-6xl mx-auto">
+            {Headline}
           </h1>
 
-          {/* Subtitle — single line; gradient on the verb "rewires" */}
-          <div className="text-sm md:text-lg lg:text-xl font-medium leading-relaxed max-w-5xl mx-auto space-y-2 text-gray-700 [&_*]:text-gray-700">
-            {i18n.language === 'en' ? (
-              <p>
-                The 6-phase method that <span className="font-bold text-gradient whitespace-nowrap">rewires</span> toxic attraction patterns
-              </p>
-            ) : (
-              <p>
-                El método de 6 fases que <span className="font-bold text-gradient whitespace-nowrap">reprograma</span> patrones de atracción tóxicos
-              </p>
-            )}
+          {/* Subtitle — solution emphasized (slightly larger per your note) */}
+          <div className="text-sm md:text-base lg:text-lg font-medium leading-relaxed max-w-5xl mx-auto space-y-1 text-gray-700 [&_*]:text-gray-700">
+            {Subheadline}
           </div>
         </div>
 
-        {/* Video — single column, minimal chrome; CONTROLS visible so users can unmute */}
-        <div className="max-w-3xl md:max-w-4xl mx-auto mb-2 md:mb-3">
+        {/* Video */}
+        <div className="max-w-3xl md:max-w-4xl mx-auto mb-1 md:mb-2">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
             <div className="aspect-video">
               <iframe
@@ -111,15 +111,13 @@ const HeroSection: React.FC = () => {
                 height="729"
                 style={{ maxWidth: '100%', height: 'auto', aspectRatio: '16 / 9', border: 0 }}
                 src={videoSrc}
-                title="Unbound VSL (EN)"
+                title={locale === 'en' ? 'Unbound VSL (EN)' : 'Unbound VSL (ES)'}
                 frameBorder={0}
                 allow="autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
                 loading="lazy"
               />
             </div>
-          </div>
-
           </div>
         </div>
 
