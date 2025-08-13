@@ -59,17 +59,17 @@ const HeroSection: React.FC = () => {
     </>
   ) : (
     <>
-      Por qué estás <span className="text-gradient whitespace-nowrap">magnéticamente atraída</span> por hombres que te <span className="font-semibold">romperán el corazón</span>
+      Entiende por qué estás <span className="text-gradient whitespace-nowrap">magnéticamente atraída</span> por hombres que te <span className="font-semibold">romperán el corazón</span>
     </>
   );
 
   const Subheadline = locale === 'en' ? (
     <p>
-      The 6-phase method that <span className="font-bold text-gradient whitespace-nowrap">rewires</span> toxic attraction patterns
+      The 6&#8209;phase method that <span className="font-bold text-gradient whitespace-nowrap">rewires</span> toxic attraction patterns
     </p>
   ) : (
     <p>
-      El método de 6 fases que <span className="font-bold text-gradient whitespace-nowrap">reprograma</span> patrones de atracción tóxicos
+      El método de 6&#8209;fases que <span className="font-bold text-gradient whitespace-nowrap">reprograma</span> patrones de atracción tóxicos
     </p>
   );
 
